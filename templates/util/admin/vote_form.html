@@ -1,0 +1,71 @@
+{% from 'buttons/cancel.html' import cancel %}
+{% from 'buttons/delete.html' import delete %}
+{% from 'buttons/edit.html' import edit %}
+{% from 'buttons/results.html' import results %}
+{% import 'buttons/new.html' as new %}
+{% import 'util/field.html' as display_field %}
+
+{%- macro render(form,vote) -%}
+	<div class="panel panel-primary">
+		<div class="panel panel-heading">
+			<div class="clearfix">
+				<div class="pull-left">
+					{{vote.title}}
+				</div>
+				<div class="btn-group pull-right">
+					{{edit("/admin/vote/"+vote.id|string()+"/edit")|safe}}
+					{{results("/admin/vote/"+vote.id|string()+"/results"|safe)}}
+					{{new.selectfield()}}
+					{{new.radiofield()}}
+					{{new.checkbox()}}
+					{{new.floatfield()}}
+					{{new.integerfield()}}
+					{{new.textbox()}}
+					{{new.textarea()}}
+					{{delete("/admin/vote/"+vote.id|string()+"/delete"|safe)}}
+				</div>
+			</div>
+		</div>
+		<div class="panel-body">
+			{{vote.description|safe()}}
+			<!--Content Panels-->
+			<div class="panel-group">
+				<form action="" method="POST" class="form-horizontal" id="submit">
+					{{ form.hidden_tag() }}
+					{% include 'util/flash.html' %}
+					{% for index in range(form|list|length-1) %}
+						{% set field = form|attr("id_"+(index|string())) %}
+						<div class="panel panel-primary">
+							<div class="panel panel-heading">
+								<div class="clear-fix">
+									<div class="btn-group pull-left">
+										{{field.label}}
+									</div>
+									<div class="btn-group pull-right">
+										{{edit("/admin/vote/"+vote.id|string()+"/edit/"+index|string())|safe}}
+										{{delete("/admin/vote/"+vote.id|string()+"/delete/"+index|string())|safe}}
+									</div>
+								</div>
+							</div>
+							<div class="panel-body">
+
+								{% for error in field.errors %}
+								<div class="alert alert-danger alert-dismissible" role="alert">
+									<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+									{{error}}
+								</div>
+								{% endfor %}
+								{{display_field.render(field)}}		
+							</div>	
+						</div>
+					{% endfor %}
+				</form>
+			</div>
+			<div class="btn-group">
+			</div>
+		</div>
+	</div>
+{%- endmacro -%}
+

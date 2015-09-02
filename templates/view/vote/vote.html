@@ -1,0 +1,11 @@
+{% extends "layout/main.html" %}
+{% import 'util/vote_form.html' as form_renderer %}
+{% set active='vote' %}
+<!--Link and Title Replacements-->
+{% set title=vote.title %}
+{% set cancel_path='/votes' %}
+<!--Content-->
+{% block content %}
+	{{form_renderer.render(form,vote,path=cancel_path)}}
+{% endblock %}
+

@@ -1,0 +1,8 @@
+{% extends "layout/main.html" %}
+{% import 'util/admin/vote_form.html' as form_renderer %}
+{% set active='admin' %}
+
+<!--Link and Title Replacements-->
+{% block content %}
+	{{form_renderer.render(form,vote)}}
+{% endblock %}

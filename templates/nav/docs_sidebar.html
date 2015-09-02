@@ -1,0 +1,93 @@
+{%- macro render(active) -%}
+	<!-- sidebar -->
+	<div class="column col-sm-2 col-xs-1 sidebar-offcanvas" id="sidebar">
+		<script>
+			/* off-canvas sidebar toggle */
+			$(function() {
+				$('[data-toggle=offcanvas]').click(function() {
+					$(this).toggleClass('visible-xs text-center');
+					$(this).find('i').toggleClass('glyphicon-chevron-right glyphicon-chevron-left');
+					$('.row-offcanvas').toggleClass('active');
+					$('#lg-menu').toggleClass('hidden-xs').toggleClass('visible-xs');
+					$('#xs-menu').toggleClass('visible-xs').toggleClass('hidden-xs');
+					$('#btnShow').toggle();
+				});
+				$('.tree-toggler ').click(function () {
+					var others=$(this).parent().parent().children().not($(this).parent())
+					others.children('ul.tree').slideUp(250);
+					others.children('span').children('b.glyphicon').removeClass('glyphicon-minus').removeClass('glyphicon-plus').addClass('glyphicon-plus');
+					$(this).parent().children('ul.tree').toggle(250);
+					$(this).children('b.glyphicon').toggleClass('glyphicon-minus').toggleClass('glyphicon-plus');
+				});
+				$('ul.tree').hide();
+				$('b.glyphicon').toggleClass('glyphicon-minus').toggleClass('glyphicon-plus');
+			});
+		</script>
+		<br \>
+		<br \>
+		<ul class="side">
+			<li><a href="#" data-toggle="offcanvas" class="visible-xs text-center"><i class="glyphicon glyphicon-chevron-right"></i></a></li>
+		</ul>
+		<ul class="side hidden-xs" id="lg-menu">
+			<li><span><a href="/admin/docs/"><i class="glyphicon glyphicon-home"></i> PVS</a></span></li>
+			<li><span class='tree-toggler'><a href="/admin/docs/usage/"><i class="glyphicon glyphicon-book"></i> Usage</a><b class='glyphicon glyphicon-minus'></b></span>
+				<ul class='side tree'>
+					<li><a href="/admin/docs/usage/#news"><i class="glyphicon glyphicon-list-alt"></i> News</a></li>
+					<li><a href="/admin/docs/usage/#votes"><i class="glyphicon glyphicon-inbox"></i> Votes</a></li>
+					<li><a href="/admin/docs/usage/#users"><i class="glyphicon glyphicon-user"></i> Users</a></li>
+					<li><a href="/admin/docs/usage/#user-keys"><i class="glyphicon glyphicon-lock"></i> User Keys</a></li>
+				</ul>
+			</li>
+			<li><span class='tree-toggler'><a href="/admin/docs/pvs/"><i class="glyphicon glyphicon-list-alt"></i> Python</a><b class='glyphicon glyphicon-minus'></b></span>
+				<ul class='side tree'>
+					<li><a href="/admin/docs/pvs/view/"><i class="glyphicon glyphicon-picture"></i> Views</a></li>
+					<li><a href="/admin/docs/pvs/form/"><i class="glyphicon glyphicon-inbox"></i> Forms</a></li>
+					<li><a href="/admin/docs/pvs/model/"><i class="glyphicon glyphicon-hdd"></i> Models</a></li>
+				</ul>
+			</li>
+			<li><span class='tree-toggler'><a href="/admin/docs/templates"><i class="glyphicon glyphicon-list"></i> Templates</a><b class='glyphicon glyphicon-minus'></b></span>
+				<ul class='side tree'>
+					<li><a href="/admin/docs/templates/layout/"><i class="glyphicon glyphicon-th-large"></i> Layouts</a></li>
+					<li><span class='tree-toggler'><a href="/admin/docs/templates/view/"><i class="glyphicon glyphicon-picture"></i> Views</a><b class='glyphicon glyphicon-minus'></b></span>
+						<ul class='side tree'>
+					<li><a href="/admin/docs/templates/view/news"><i class=" glyphicon glyphicon-list-alt"></i> News</a></li>
+					<li><a href="/admin/docs/templates/view/vote"><i class=" glyphicon glyphicon-inbox"></i> Votes</a></li>
+					<li><a href="/admin/docs/templates/view/user"><i class=" glyphicon glyphicon-user"></i> Users</a></li>
+					<li><a href="/admin/docs/templates/view/docs"><i class=" glyphicon glyphicon-book"></i> Docs</a></li>
+					<li><a href="/admin/docs/templates/view/home"><i class=" glyphicon glyphicon-home"></i> Home</a></li>
+					<li><a href="/admin/docs/templates/view/errors"><i class=" glyphicon glyphicon-warning-sign"></i> Errors</a></li>	
+						</ul>
+					</li>				
+					<li><a href="/admin/docs/templates/util/"><i class="glyphicon glyphicon-flash"></i> Utilities</a></li>
+					<li><a href="/admin/docs/templates/nav/"><i class="glyphicon glyphicon-bookmark"></i> Navigation</a></li>
+					<li><a href="/admin/docs/templates/buttons/"><i class="glyphicon glyphicon-unchecked"></i> Buttons</a></li>
+					<li><a href="/admin/docs/templates/edit/"><i class="glyphicon glyphicon-edit"></i> Edit</a></li>
+				</ul>
+			</li>
+			<li><span class='tree-toggler'><a href="/admin/docs/static"><i class="glyphicon glyphicon-file"></i> Static Files</a><b class='glyphicon glyphicon-minus'></b></span>
+				<ul class='side tree'>
+					<li><a href="/admin/docs/static/less/"><i class=" glyphicon glyphicon-eye-close"></i> Less</a></li>
+					<li><a href="/admin/docs/static/js/"><i class="glyphicon glyphicon-certificate"></i> Javascript</a></li>
+				</ul>
+			<li><span><a href="/admin/docs/dependencies"><i class="glyphicon glyphicon-folder-open"></i> Dependencies</a></span></li>
+
+		</ul>
+		<ul class="nav hidden-xs" id="sidebar-footer">
+			<li>
+				<a href="/"><h3>PVS</h3> <i class="glyphicon glyphicon-heart"></i> {{g.appname}}</a>
+			</li>
+		</ul>
+
+		<!-- tiny only nav-->
+		<ul class="side visible-xs" id="xs-menu">
+			<li><a href="/admin/docs/" class="text-center"><i class="glyphicon glyphicon-home"></i></a></li>	
+			<li><a href="/admin/docs/usage/" class="text-center"><i class="glyphicon glyphicon-book"></i></a></li>
+			<li><a href="/admin/docs/pvs/" class="text-center"><i class="glyphicon glyphicon-list-alt"></i></a></li>
+			<li><a href="/admin/docs/templates/" class="text-center"><i class="glyphicon glyphicon-list"></i></a></li>
+			<li><a href="/admin/docs/static/" class="text-center"><i class="glyphicon glyphicon-file"></i></a></li>
+			<li><a href="/admin/docs/dependencies" class="text-center"><i class="glyphicon glyphicon-folder-open"></i></a></li>
+		</ul>
+
+	</div>
+	<!-- /sidebar -->
+{%- endmacro -%}

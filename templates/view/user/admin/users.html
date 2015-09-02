@@ -1,0 +1,30 @@
+{% extends "layout/panel_list.html" %}
+{% from 'buttons/delete.html' import delete %}
+{% from 'buttons/edit.html' import edit %}
+{% from 'buttons/results.html' import results %}
+{% set title="User" %}
+{% set path="/admin/users" %}
+{% set active='admin' %}
+{% block toolbar %}
+<button onClick="javascript:window.location.href='/admin/user'" class="btn btn-success">New User</button>
+{% endblock %}
+{% block list %}
+	<!--Gets news stories-->
+	{% for user in users %}
+		{{panel.render("<a href='/admin/user/"+user.id|string()+"/' class='pull-left'>"+user.username+"</a>",
+			"Grade: " + user.grade|string() + "<br \>"
+			"Admin: " + user.admin|string(),
+			user.id,
+			buttons=buttons(user.id),
+			collapse=true)
+		}}
+	{% else %}
+		<div class="panel panel-primary">
+			<div class="panel-body"><em>Unbelievable.  No entries here so far</em></div>
+		</div>
+	{% endfor %}
+{% endblock %}
+{% macro buttons(id) %}
+	{{edit("/admin/user/"+id|string()+"/edit")|safe}}
+	{{delete("/admin/user/"+id|string()+"/delete"|safe)}}
+{% endmacro %}
