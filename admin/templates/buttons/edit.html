@@ -1,7 +1,0 @@
-{%- macro edit(path,active=true) -%}
-	{% if active %}
-		<a href='{{path}}' class="btn btn-info"><span class='glyphicon glyphicon-pencil'></span></a>
-	{% else %}
-		<button class="btn btn-info disabled"><span class='glyphicon glyphicon-pencil'></span></button>
-	{% endif %}
-{%- endmacro -%}
