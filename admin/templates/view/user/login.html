@@ -1,0 +1,11 @@
+{% extends "layout/main.html" %}
+{% import 'util/form.html' as form_renderer %}
+
+<!--Link and Title Replacements-->
+{% set title="Login" %}
+{% set cancel_path='/' %}
+<!--Content-->
+{% block content %}
+	{{form_renderer.render(form,title="Login",path=cancel_path)}}
+{% endblock %}
+

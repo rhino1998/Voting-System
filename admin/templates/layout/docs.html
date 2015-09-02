@@ -1,0 +1,24 @@
+{% extends 'layout/base.html'%}
+{% import 'nav/navbar.html' as navbar%}
+{% import 'nav/docs_sidebar.html' as sidebar%}
+{% block body %}
+<div class="wrapper">
+	<div class="box">
+		<div class="row row-offcanvas row-offcanvas-left">
+			{{sidebar.render(active)}}
+			<!-- main right col -->
+			<div class="column col-sm-10 col-xs-11" id="main">
+				{{navbar.render(active)}}
+				<div class="padding">
+					<div class="full col-sm-9">
+						<!-- content -->                      
+						<div class="row">
+						{%block content%}{%endblock%}
+						</div><!--/row-->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

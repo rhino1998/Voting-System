@@ -1,0 +1,22 @@
+{% extends "layout/panel_list.html" %}
+{% set title="Admin - News" %}
+{% set path="/admin/news" %}
+{% set active='admin' %}
+{% block toolbar %}
+<button onClick="javascript:window.location.href='/admin/article'" class="btn btn-success">New Article</button>
+{% endblock %}
+{% block list %}
+	<!--Gets news stories-->
+	{% for article in news %}
+		{{panel.render("<a href='/admin/article/"+article.id|string()+"/' class='pull-left'>"+article.title+"</a>",
+			article.body,
+			article.id,
+			buttons=edit("/admin/article/"+article.id|string()+"/edit")+delete("/admin/article/"+article.id|string()+"/delete"),
+			collapse=true)
+		}}
+	{% else %}
+		<div class="panel panel-primary">
+			<div class="panel-body"><em>Unbelievable.  No entries here so far</em></div>
+		</div>
+	{% endfor %}
+{% endblock %}
